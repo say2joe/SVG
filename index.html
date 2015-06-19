@@ -12,45 +12,45 @@
 
             var deckplans = ['deckplan-a','deckplan-b'];
 
-            var Seating = {
+            var Booking = {
 
                 $deckplans: [],
 
-                Seats: [], Cabins: [],
+                RoomNumbers: [], Cabins: [],
 
-                reCabinNomenclature: /^\w{1,2}\d{3,4}$/i,
+                reRoomNomenclature: /^\w{1,2}\d{3,4}$/i,
 
                 setCabins: function($deck) {
                     var deck = $deck[0].id;
                     $deck.find('[fill]').each(function(){
-                        Seating.Cabins.push(this);
+                        Booking.Cabins.push(this);
                         this.deck = deck;
                     });
                 },
 
-                setSeats: function($deck) {
+                setRoomNumbers: function($deck) {
                     $deck.find('[font-family]').each(function(){
                         var textNode, $t = $(this), roomNo = $t.text();
-                        if (Seating.reCabinNomenclature.test(roomNo)) {
+                        if (Booking.reRoomNomenclature.test(roomNo)) {
                             if (this.nodeName !== '#text') { // tspan
                                 textNode = $t.closest('text')[0];
                             }
-                            Seating.Seats.push(textNode || this);
+                            Booking.RoomNumbers.push(textNode || this);
                         }
                     });
                 },
 
                 init: function(svg) {
                     var $deck = $(svg.documentElement).appendTo($b);
-                    Seating.$deckplans.push($deck);
-                    Seating.setCabins($deck);
-                    Seating.setSeats($deck);
+                    Booking.$deckplans.push($deck);
+                    Booking.setRoomNumbers($deck);
+                    Booking.setCabins($deck);
                 }
 
             };
 
             deckplans.forEach(function(deck) {
-                d3.xml('svg/zu-'+ deck +'.svg', 'image/svg+xml', Seating.init);
+                d3.xml('svg/zu-'+ deck +'.svg', 'image/svg+xml', Booking.init);
             });
         </script>
     </body>
