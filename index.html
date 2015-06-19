@@ -21,8 +21,10 @@
                 reCabinNomenclature: /^\w{1,2}\d{3,4}$/i,
 
                 setCabins: function($deck) {
+                    var deck = $deck[0].id;
                     $deck.find('[fill]').each(function(){
                         Seating.Cabins.push(this);
+                        this.deck = deck;
                     });
                 },
 
