@@ -30,10 +30,10 @@
 
                 setSeats: function($deck) {
                     $deck.find('[font-family]').each(function(){
-                        var $t = $(this), roomNo = $t.text();
+                        var textNode, $t = $(this), roomNo = $t.text();
                         if (Seating.reCabinNomenclature.test(roomNo)) {
                             if (this.nodeName !== '#text') { // tspan
-                                var textNode = $t.closest('text')[0];
+                                textNode = $t.closest('text')[0];
                             }
                             Seating.Seats.push(textNode || this);
                         }
