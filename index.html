@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SVG Primer</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    </head>
+    <body>
+        <script>
+            var $w = $(window), $b = $('body');
+
+            var deckplans = ['deckplan-a','deckplan-b'];
+
+            var Seating = {
+
+                $deckplans: [],
+
+                Seats: [], Cabins: [],
+
+                reCabinNomenclature: /^\w{1,2}\d{3,4}$/i,
+
+                setCabins: function($deck) {
+                    $deck.find('[fill]').each(function(){
+                        Seating.Cabins.push(this);
+                    });
+                },
+
+                setSeats: function($deck) {
+                    $deck.find('[font-family]').each(function(){
+                        var $t = $(this), roomNo = $t.text();
+                        if (Seating.reCabinNomenclature.test(roomNo)) {
+                            if (this.nodeName !== '#text') { // tspan
+                                var textNode = $t.closest('text')[0];
+                            }
+                            Seating.Seats.push(textNode || this);
+                        }
+                    });
+                },
+
+                init: function(svg) {
+                    var $deck = $(svg.documentElement).appendTo($b);
+                    Seating.$deckplans.push($deck);
+                    Seating.setCabins($deck);
+                    Seating.setSeats($deck);
+                }
+
+            };
+
+            deckplans.forEach(function(deck) {
+                d3.xml('svg/zu-'+ deck +'.svg', 'image/svg+xml', Seating.init);
+            });
+        </script>
+    </body>
+</html>
