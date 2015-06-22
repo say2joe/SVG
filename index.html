@@ -21,10 +21,10 @@
                 reRoomNomenclature: /^\w{1,2}\d{3,4}$/i,
 
                 setCabins: function($deck) {
-                    var deck = $deck[0].id;
+                    var deckId = $deck[0].id;
                     $deck.find('[fill]').each(function(){
                         Booking.Cabins.push(this);
-                        this.deck = deck;
+                        this.deck = deckId;
                     });
                 },
 
