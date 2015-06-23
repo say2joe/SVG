@@ -8,7 +8,7 @@
     </head>
     <body>
         <script>
-            var deckplans = ['deckplan-a','deckplan-b'];
+            var deckplans = ['a','b'];
 
             var $w = $(window), $b = $('body');
 
@@ -51,7 +51,8 @@
             };
 
             deckplans.forEach(function(deck) {
-                d3.xml('svg/zu-'+ deck +'.svg', 'image/svg+xml', Booking.init);
+                var path = 'deckplans/svg/illustrator/saveas/deckplan-zu-';
+                d3.xml(path + deck + '.svg', 'image/svg+xml', Booking.init);
             });
         </script>
     </body>
