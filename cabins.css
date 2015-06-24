@@ -1,0 +1,21 @@
+#Cabins { font-size: 6px; }
+
+#Cabins text {
+    cursor: pointer;
+}
+
+#Cabins text:hover, #Cabins text tspan:hover {
+    font-size: 1.125em !important;
+    font-weight: bold;
+    fill: blue;
+}
+
+#Cabins text.selected, #Cabins text.selected tspan {
+    font-size: 1.250em !important;
+    font-weight: bolder;
+    fill: darkblue;
+}
+
+#Cabins text.highlight {
+
+}

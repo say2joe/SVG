@@ -3,56 +3,18 @@
     <head>
         <title>Insight Cruises - Seating Selection</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" type="text/css" href="cabins.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
     <body>
+        <script src="svg/cabins.js"></script>
         <script>
-            var deckplans = ['a','b'];
-
-            var $w = $(window), $b = $('body');
-
-            var Booking = {
-
-                $deckplans: [],
-
-                RoomNumbers: [], Cabins: [],
-
-                reRoomNomenclature: /^\w{1,2}\d{3,4}$/i,
-
-                setCabins: function($deck) {
-                    var deckId = $deck[0].id;
-                    $deck.find('[fill]').each(function(){
-                        Booking.Cabins.push(this);
-                        this.deck = deckId;
-                    });
-                },
-
-                setRoomNumbers: function($deck) {
-                    $deck.find('[font-family]').each(function(){
-                        var textNode, $t = $(this), roomNo = $t.text();
-                        if (Booking.reRoomNomenclature.test(roomNo)) {
-                            if (this.nodeName !== '#text') { // tspan
-                                textNode = $t.closest('text')[0];
-                            }
-                            Booking.RoomNumbers.push(textNode || this);
-                        }
-                    });
-                },
-
-                init: function(svg) {
-                    var $deck = $(svg.documentElement).appendTo($b);
-                    Booking.$deckplans.push($deck);
-                    Booking.setRoomNumbers($deck);
-                    Booking.setCabins($deck);
-                    console.log(Booking);
-                }
-
-            };
-
-            deckplans.forEach(function(deck) {
-                var path = 'deckplans/svg/illustrator/saveas/deckplan-zu-';
-                d3.xml(path + deck + '.svg', 'image/svg+xml', Booking.init);
+            var deckplans = ['a','b'],
+                path = 'svg/deckplan-zu-';
+            deckplans.forEach(function(deck){
+                // Each SVG document must include a layer with id="Cabins".
+                d3.xml(path + deck + '.svg', 'image/svg+xml', Cabins.init);
             });
         </script>
     </body>
