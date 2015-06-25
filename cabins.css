@@ -1,7 +1,10 @@
+svg { display: none; }
+
 #Cabins { font-size: 6px; }
 
 #Cabins text {
     cursor: pointer;
+    display: none;
 }
 
 #Cabins text:hover, #Cabins text tspan:hover {
