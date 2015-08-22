@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Insight Cruises - Seating Selection</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <!-- Stylesheets from Insight Cruises website -->
+        <link rel="stylesheet" type="text/css" href="cabins.css">
+        <link rel="stylesheet" type="text/css" href="//www.insightcruises.com/css/magnific-popup.css">
+        <!-- JavaScript from Insight Cruises website for Cabin selection -->
+        <script src="//www.insightcruises.com/js/jquery-1.10.1.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="//www.insightcruises.com/js/jquery.magnific-popup.min.js"></script>
+    </head>
+    <body>
+        <script src="cabins.js"></script>
+        <script>
+            /**
+             * UI Cabin Selection
+             * This HTML page should be launched once the user chooses a cabin type. Once a cabin selection
+             * is made, a new (hidden) input field will be created in the opening document's first form.
+             * Any processing script should expect a cabin key of: "cabin_room".
+             */
+
+            var path = 'svg/deckplan-zu-', decks = '01,04,05,06,07,08,10',
+                qsCabins = location.search.match(/cabins=([\w\,]+)\&?/)[1];
+
+            openCabins = qsCabins || 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081,';
+            openCabins += 'J1040,J1042,J1048,J1054,J1060,J1062,J1068,J1074,C1082,D1013,D1017,D1021,D1023,D1027';
+            Cabins.open = openCabins.split(',');
+
+            decks.split(',').forEach(function(deck){
+                // Each SVG image document must include a layer with id="Cabins".
+                d3.xml(path + deck + '.svg', 'image/svg+xml', Cabins.init.bind(deck));
+            });
+        </script>
+        <div id="tmplConfirmation" class="white-popup mfp-hide">
+            <h1>Cabin Selection</h1>
+            <p>If you'd like to book the cabin you just chose, please click the button below. If you'd like to keep browsing, please close this message box.</p>
+        	<p class="center"><button type="button" class="popup-modal-dismiss">Book This Cabin!</button></p>
+        </div>
+    </body>
+</html>

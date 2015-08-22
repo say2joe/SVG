@@ -22,3 +22,29 @@ svg { display: none; }
 #Cabins text.highlight {
 
 }
+
+.mfp-content {
+    width: 95% !important;
+}
+
+.white-popup button {
+    background-color: dodgerblue;
+    border-radius: 5px;
+    font-size: 1.25em;
+    outline: none;
+}
+
+.white-popup {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    position: relative;
+    margin: 20px auto;
+    max-width: 500px;
+    background: #FFF;
+    padding: 20px;
+    width: auto;
+}
+
+.center {
+    text-align: center;
+}

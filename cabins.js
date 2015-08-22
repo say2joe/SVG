@@ -2,10 +2,11 @@ var $w = $(window), $b = $('body');
 
 var Cabins = {
     selector: '#Cabins',
-    highlight: 'lightblue'
+    highlight: 'lightblue',
+    confirmation: '#tmplConfirmation'
 };
 
-(function(app) {
+(function($, app) {
 //app === Cabins
 
     app.cabins = [];
@@ -21,28 +22,36 @@ var Cabins = {
         // Add bounding box.
     };
 
+    app.submitSelection = function() {
+        var $cabin_room = $('<input name="cabin_room"/>').val(app.selection);
+        $cabin_room.appendTo(window.opener.document.forms[0]);
+    };
+
     app.select = function(event) {
-        var i = 0, roomNo = this.textContent;
+        var cabin, i = 0;
         app.cabins.forEach(function(cabin) {
             d3.select(cabin).classed('selected', false);
         });
-        var cabin = this.toggleClass('selected');
-        if (cabin.hasClass('selected')) {
-            app.showSelection(this, true);
-            app.selection = roomNo;
+        if (this.toggleClass) {
+            cabin = this.toggleClass('selected');
+            if (cabin.hasClass('selected')) {
+                app.selection = this.textContent;
+                app.showSelection(this, true);
+            }
+        } else {
+            $.magnificPopup.open({
+                items: {
+                    src: $(this.confirmation),
+                    type: 'inline'
+                }
+            });
         }
-    };
-
-    app.handleEvents = function(deck) {
-        $(deck).find(this.selector)
-            .on('click', 'text', app.select)
-            .on('hover', 'text', app.hover);
     };
 
     app.setDeckplans = function(deck) {
         deck.cabins = [];
         app.deckplans.push(deck);
-        var re = /^([A-z]+)(\s|\-)?(\d+)$/;
+        var re = /^([A-z]+)(\s|\-)?(\d+)$/i;
         $(deck).find(this.selector)
             .children('text').each(function(){
                 var category = this.textContent.replace(re, '$1'),
@@ -64,6 +73,14 @@ var Cabins = {
             });
     };
 
+    app.handleEvents = function(deck) {
+        $(deck).find(this.selector)
+            .on('click', 'text', app.select)
+            .on('hover', 'text', app.hover);
+        $(Cabins.confirmation)
+            .on('click', 'button', this.submitSelection);
+    };
+
     app.init = function(svg) {
         try {
             svg.documentElement.setAttribute('id', 'dp-' + this);
@@ -76,7 +93,7 @@ var Cabins = {
         }
     };
 
-})(Cabins);
+})(jQuery, Cabins);
 
 /*
 Augment SVG elements with helper methods:
