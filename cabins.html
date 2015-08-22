@@ -24,8 +24,7 @@
             var path = 'svg/deckplan-zu-', decks = '01,04,05,06,07,08,10',
                 qsCabins = location.search.match(/cabins=([\w\,]+)\&?/)[1];
 
-            openCabins = qsCabins || 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081,';
-            openCabins += 'J1040,J1042,J1048,J1054,J1060,J1062,J1068,J1074,C1082,D1013,D1017,D1021,D1023,D1027';
+            openCabins = qsCabins || 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081';
             Cabins.open = openCabins.split(',');
 
             decks.split(',').forEach(function(deck){
