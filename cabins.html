@@ -18,7 +18,7 @@
              * UI Cabin Selection
              * This HTML page should be launched once the user chooses a cabin type. Once a cabin selection
              * is made, a new (hidden) input field will be created in the opening document's first form.
-             * Any processing script should expect a cabin key of: "cabin_room".
+             * Any processing script should expect a cabin room input field named of: "cabin_room".
              */
 
             var path = 'svg/deckplan-zu-', decks = '01,04,05,06,07,08,10',
@@ -35,8 +35,8 @@
         </script>
         <div id="tmplConfirmation" class="white-popup mfp-hide">
             <h1>Cabin Selection</h1>
-            <p>If you'd like to book the cabin you just chose, please click the button below. If you'd like to keep browsing, please close this message box.</p>
-        	<p class="center"><button type="button" class="popup-modal-dismiss">Book This Cabin!</button></p>
+            <p>If you'd like to book the cabin you just chose, please click the button below. If you'd like to keep browsing, please close this message.</p>
+        	<p class="center"><button type="button" class="reserve popup-modal-dismiss">Reserve This Cabin</button></p>
         </div>
     </body>
 </html>

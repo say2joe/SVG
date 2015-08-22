@@ -1,5 +1,9 @@
 svg { display: none; }
 
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
 #Cabins { font-size: 6px; }
 
 #Cabins text {
@@ -31,7 +35,9 @@ svg { display: none; }
     background-color: dodgerblue;
     border-radius: 5px;
     font-size: 1.25em;
+    padding: 5px 15px;
     outline: none;
+    color: #eee;
 }
 
 .white-popup {
