@@ -12,6 +12,9 @@
         <script src="//www.insightcruises.com/js/jquery.magnific-popup.min.js"></script>
     </head>
     <body>
+        <figure id="shipview">
+            
+        </figure>
         <script src="cabins.js"></script>
         <script>
             /**
@@ -22,10 +25,10 @@
              */
 
             var path = 'svg/deckplan-zu-', decks = '01,04,05,06,07,08,10',
-                qsCabins = location.search.match(/cabins=([\w\,]+)\&?/)[1];
+                qsCabins = location.search.match(/cabins=([\w\,]+)\&?/);
 
-            openCabins = qsCabins || 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081';
-            Cabins.open = openCabins.split(',');
+            qsCabins = qsCabins? qsCabins[1] : 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081,VC4152,G4101';
+            Cabins.open = qsCabins.split(',');
 
             decks.split(',').forEach(function(deck){
                 // Each SVG image document must include a layer with id="Cabins".

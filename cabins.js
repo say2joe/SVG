@@ -3,6 +3,7 @@ var $w = $(window), $b = $('body');
 var Cabins = {
     selector: '#Cabins',
     highlight: 'lightblue',
+    selectedRoom: 'cabin_room',
     confirmation: '#tmplConfirmation'
 };
 
@@ -24,9 +25,8 @@ var Cabins = {
 
     app.submitSelection = function() {
         if ($(this).hasClass('reserve')) {
-            var $cabin_room = $('<input name="cabin_room"/>').val(app.selection);
-            $cabin_room.appendTo(window.opener.document.forms[0]);
-            window.close();
+            var $cabin_room = $('<input type="hidden"/>').val(app.selection);
+            $cabin_room.attr('name', selectedRoom).closest('form').submit();
         }
     };
 
