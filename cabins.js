@@ -15,6 +15,10 @@ var Cabins = {
     app.selection = '';
     app.categories = {};
 
+    app.legend = function(svg) {
+        app.legend = $(svg.documentElement).appendTo('figure').show();
+    };
+
     app.hover = function(event) {
         // Handled via CSS.
     };
@@ -88,7 +92,6 @@ var Cabins = {
         try {
             svg.documentElement.setAttribute('id', 'dp-' + this);
             var deck = $(svg.documentElement).appendTo($b)[0];
-            app.prevCabin = location.search.substr(1);
             app.handleEvents(deck);
             app.setDeckplans(deck);
         } catch (err) {
