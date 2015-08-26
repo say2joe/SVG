@@ -28,7 +28,7 @@ var Cabins = {
         // Add bounding box.
     };
 
-    app.submitSelection = function() {
+    app.submitSelection = function(event) {
         if ($(this).hasClass('reserve')) {
             var $cabin_room = $('<input type="hidden"/>').attr('name', Cabins.selectedRoom);
             $b.find('form').append($cabin_room.val(app.selection)).submit();
@@ -85,7 +85,7 @@ var Cabins = {
         $(deck).find(this.selector)
             .on('click', 'text', app.select)
             .on('hover', 'text', app.hover);
-        $(Cabins.confirmation)
+        $(Cabins.confirmation).off('click')
             .on('click', 'button', this.submitSelection);
     };
 
