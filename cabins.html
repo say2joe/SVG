@@ -23,7 +23,7 @@
              */
 
             var app = Cabins, ship = 'zu-', path = 'svg/deckplan-', decks = '01,04,05,06,07,08,10',
-                legend = d3.xml(path + 'horizon.svg', 'image/svg+xml', app.legend),
+                legend = d3.xml(path + ship + 'horizon.svg', 'image/svg+xml', app.legend),
                 qsCabins = location.search.match(/cabins=([\w\,]+)\&?/);
 
             qsCabins = qsCabins? qsCabins[1] : 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081,VC4152,G4101';

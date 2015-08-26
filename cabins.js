@@ -16,7 +16,8 @@ var Cabins = {
     app.categories = {};
 
     app.legend = function(svg) {
-        app.legend = $(svg.documentElement).appendTo('figure').show();
+        var $sideview = $(svg.documentElement).appendTo('figure').show();
+        $sideview.addClass('.sideview');
     };
 
     app.hover = function(event) {
@@ -95,7 +96,7 @@ var Cabins = {
             app.handleEvents(deck);
             app.setDeckplans(deck);
         } catch (err) {
-            console.log(err.message);
+            console.log(err.message, 'for SVG of deck:', this.toString());
         }
     };
 
