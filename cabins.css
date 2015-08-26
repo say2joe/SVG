@@ -4,9 +4,17 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+#deckplans {
+    /* margin-top: 220px; */
+}
+
 #shipview {
+    background-color: #fff;
     top: 0; right: 0;
     position: fixed;
+    display: none;
+    width: 640px;
+    margin: 0;
 }
 
 #Cabins { font-size: 6px; }

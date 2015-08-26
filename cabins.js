@@ -1,7 +1,6 @@
-var $w = $(window), $b = $('body');
-
 var Cabins = {
     selector: '#Cabins',
+    decks: '#deckplans',
     highlight: 'lightblue',
     selectedRoom: 'cabin_room',
     confirmation: '#tmplConfirmation'
@@ -14,6 +13,11 @@ var Cabins = {
     app.deckplans = [];
     app.selection = '';
     app.categories = {};
+
+    var $w = $(window),
+        $b = $('body'),
+        $f = $b.find('form')
+        $decks = $(app.decks);
 
     app.legend = function(svg) {
         var $sideview = $(svg.documentElement).appendTo('figure').show();
@@ -31,7 +35,7 @@ var Cabins = {
     app.submitSelection = function(event) {
         if ($(this).hasClass('reserve')) {
             var $cabin_room = $('<input type="hidden"/>').attr('name', Cabins.selectedRoom);
-            $b.find('form').append($cabin_room.val(app.selection)).submit();
+            $f.append($cabin_room.val(app.selection)).submit();
         }
     };
 
@@ -92,7 +96,7 @@ var Cabins = {
     app.init = function(svg) {
         try {
             svg.documentElement.setAttribute('id', 'dp-' + this);
-            var deck = $(svg.documentElement).appendTo($b)[0];
+            var deck = $(svg.documentElement).appendTo($decks)[0];
             app.handleEvents(deck);
             app.setDeckplans(deck);
         } catch (err) {
