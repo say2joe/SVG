@@ -30,8 +30,8 @@ var Cabins = {
 
     app.submitSelection = function() {
         if ($(this).hasClass('reserve')) {
-            var $cabin_room = $('<input type="hidden"/>').val(app.selection);
-            $cabin_room.attr('name', selectedRoom).closest('form').submit();
+            var $cabin_room = $('<input type="hidden"/>').attr('name', Cabins.selectedRoom);
+            $b.find('form').append($cabin_room.val(app.selection)).submit();
         }
     };
 
