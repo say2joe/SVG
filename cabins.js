@@ -85,8 +85,7 @@ var Cabins = {
     };
 
     app.handleEvents = function() {
-        $(app.decks)
-            .on('hover', 'text', app.hover)
+        $decks.on('hover', 'text', app.hover)
             .on('click', 'text', app.select);
         $('body').on('click', '.reserve',
             app.submitSelection
