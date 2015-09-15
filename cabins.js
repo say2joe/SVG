@@ -50,17 +50,16 @@ var Cabins = {
                 app.selection = this.textContent;
                 app.showSelection(this, true);
             }
-        } else {
-            $.magnificPopup.open({
-                items: {
-                    src: $(this.confirmation),
-                    type: 'inline'
-                }
-            });
         }
+        $.magnificPopup.open({
+            items: {
+                src: $(app.confirmation),
+                type: 'inline'
+            }
+        });
     };
 
-    app.setDeckplans = function(deck) {
+    app.setDeckplan = function(deck) {
         deck.cabins = [];
         app.deckplans.push(deck);
         var re = /^([A-z]+)(\s|\-)?(\d+)$/i;
@@ -85,22 +84,28 @@ var Cabins = {
             });
     };
 
-    app.handleEvents = function(deck) {
-        $(deck).find(this.selector)
-            .on('click', 'text', app.select)
-            .on('hover', 'text', app.hover);
-        $(Cabins.confirmation).off('click')
-            .on('click', 'button', this.submitSelection);
+    app.handleEvents = function() {
+        $(app.decks)
+            .on('hover', 'text', app.hover)
+            .on('click', 'text', app.select);
+        $('body').on('click', '.reserve',
+            app.submitSelection
+        );
     };
 
     app.init = function(svg) {
+        var deck;
         try {
             svg.documentElement.setAttribute('id', 'dp-' + this);
-            var deck = $(svg.documentElement).appendTo($decks)[0];
-            app.handleEvents(deck);
-            app.setDeckplans(deck);
+            deck = $(svg.documentElement).appendTo($decks)[0];
+            app.setDeckplan(deck);
         } catch (err) {
             console.log(err.message, 'for SVG of deck:', this.toString());
+        } finally {
+            if (!app.initialized) {
+                app.handleEvents(deck);
+                app.initialized = true;
+            }
         }
     };
 
