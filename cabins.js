@@ -16,7 +16,7 @@ var Cabins = {
 
     var $w = $(window),
         $b = $('body'),
-        $f = $b.find('form')
+        $f = $b.find('form'),
         $decks = $(app.decks);
 
     app.legend = function(svg) {
