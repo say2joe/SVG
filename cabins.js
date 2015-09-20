@@ -25,7 +25,8 @@ var Cabins = {
     };
 
     app.hover = function(event) {
-        // Handled via CSS.
+        var $deckno = $(event.target).closest('svg').attr('id');
+        $deckno = $deckno.replace(/.+(\d+)$/, '$1');
     };
 
     app.showSelection = function(text, visible) {
@@ -92,9 +93,8 @@ var Cabins = {
     };
 
     app.handleEvents = function() {
-        $decks.on('hover', app.deckhover)
-            .on('hover', 'text', app.hover)
-            .on('click', 'text', app.select);
+
+        $decks.hover(app.deckhover).on('click', 'text', app.select);
         $('body').on('click', '.reserve',
             app.submitSelection
         );
