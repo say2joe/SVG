@@ -5,7 +5,11 @@ body {
 }
 
 #deckplans {
-    margin-top: 220px;
+    margin-top: 285px;
+}
+
+#deckplans svg {
+    max-width: 333px;
 }
 
 #shipview {

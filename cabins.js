@@ -1,6 +1,7 @@
 var Cabins = {
     selector: '#Cabins',
     decks: '#deckplans',
+    shipview: '#shipview',
     highlight: 'lightblue',
     selectedRoom: 'cabin_room',
     confirmation: '#tmplConfirmation'
@@ -86,15 +87,17 @@ var Cabins = {
     };
 
     app.deckhover = function(event) {
-        var id = $(event.target).attr('id').replace('dp-','');
-        $('#shipview').find('D' + id).css({
-            fill: (event.type === "mouseenter")? '#00f' : '#fff'
-        });
+        var id = $(event.target).attr('id');
+        if (id && event.type === 'mouseenter') {
+            app.$hipview.find('#D' + id.replace('dp-','')).css({ fill: '#00f' });
+        } else {
+            app.$hipview.find('#Decks').children().css({ fill: '#000' });
+        }
     };
 
     app.handleEvents = function() {
-
-        $decks.hover(app.deckhover).on('click', 'text', app.select);
+        $decks.on('click', 'text', app.select)
+            .find('svg').hover(app.deckhover);
         $('body').on('click', '.reserve',
             app.submitSelection
         );
@@ -110,6 +113,7 @@ var Cabins = {
             console.log(err.message, 'for SVG of deck:', this.toString());
         } finally {
             if (!app.initialized) {
+                app.$hipview = $(app.shipview);
                 app.handleEvents(deck);
                 app.initialized = true;
             }
