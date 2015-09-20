@@ -84,8 +84,16 @@ var Cabins = {
             });
     };
 
+    app.deckhover = function(event) {
+        var id = $(event.target).attr('id').replace('dp-','');
+        $('#shipview').find('D' + id).css({
+            fill: (event.type === "mouseenter")? '#00f' : '#fff'
+        });
+    };
+
     app.handleEvents = function() {
-        $decks.on('hover', 'text', app.hover)
+        $decks.on('hover', app.deckhover)
+            .on('hover', 'text', app.hover)
             .on('click', 'text', app.select);
         $('body').on('click', '.reserve',
             app.submitSelection
