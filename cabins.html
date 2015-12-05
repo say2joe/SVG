@@ -17,17 +17,19 @@
         </figure>
         <section id="deckplans"></section>
         <script src="cabins.js"></script>
-        <script>
+        <script>(function(Cabins){
             /**
              * UI Cabin Selection
              * This HTML page should be launched once the user chooses a cabin type. Once a cabin selection
              * is made, a new (hidden) input field will be created in the opening document's first form.
              * Any processing script should expect a cabin room input field named of: "cabin_room".
+             * NOTE: The cabins.js file must be loaded before this inline script is executed.
              */
             var availableRooms = 'SA7066,SA7071,SA7068,SA7073,SA7070,SA7075,SA7072,SA7077,SA7074,SA7079,SA7076,SA7081,VC4152,G4101';
 
-            var app = Cabins, ship = 'zu-', path = 'svg/deckplan-', decks = '01,04,05,06,07,08,10',
-                legend = d3.xml(path + ship + 'horizon-decks.svg', 'image/svg+xml', app.legend),
+            var ship = 'we', path = 'svg/' + ship + '/deck-';
+
+            var app = Cabins, legend = d3.xml(path + ship + '-horizon-decks.svg', 'image/svg+xml', app.legend),
                 qsCabins = location.search.match(/cabins=([\w\,]+)\&?/);
 
             qsCabins = qsCabins? qsCabins[1] : availableRooms;
@@ -35,9 +37,9 @@
 
             decks.split(',').forEach(function(deck){
                 // Each SVG image document must include a layer with id="Cabins".
-                d3.xml(path + ship + deck + '.svg', 'image/svg+xml', Cabins.init.bind(deck));
+                d3.xml(path + ship + '-' + deck + '.svg', 'image/svg+xml', Cabins.init.bind(deck));
             });
-        </script>
+        })(Cabins);</script>
         <div id="tmplConfirmation" class="white-popup mfp-hide">
             <h1>Cabin Selection</h1>
             <p>If you'd like to book the cabin you just chose, please click the button below. If you'd like to keep browsing, please close this message.</p>

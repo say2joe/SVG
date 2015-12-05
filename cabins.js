@@ -8,7 +8,7 @@ var Cabins = {
 };
 
 (function($, app) {
-//app === Cabins
+    //app === Cabins
 
     app.cabins = [];
     app.deckplans = [];
@@ -66,7 +66,7 @@ var Cabins = {
         app.deckplans.push(deck);
         var re = /^([A-z]+)(\s|\-)?(\d+)$/i;
         $(deck).find(this.selector)
-            .children('text').each(function(){
+            .children('text').each(function() {
                 var category = this.textContent.replace(re, '$1'),
                     bucket = app.categories[category],
                     roomNo = this.textContent;
@@ -89,9 +89,13 @@ var Cabins = {
     app.deckhover = function(event) {
         var id = $(event.target).attr('id');
         if (id && event.type === 'mouseenter') {
-            app.$hipview.find('#D' + id.replace('dp-','')).css({ fill: '#00f' });
+            app.$hipview.find('#D' + id.replace('dp-', '')).css({
+                fill: '#00f'
+            });
         } else {
-            app.$hipview.find('#Decks').children().css({ fill: '#000' });
+            app.$hipview.find('#Decks').children().css({
+                fill: '#000'
+            });
         }
     };
 
